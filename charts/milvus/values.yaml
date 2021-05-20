@@ -23,6 +23,13 @@ network:
 
 storage:
   autoFlushInterval: 1
+  s3:
+    enabled: false
+    address: 192.168.18.161
+    port: 7480
+    access_key: replace_with_your_access_key
+    secret_key: replace_with_your_secret_key
+    bucket: milvus
 
 wal:
   enabled: true
@@ -46,7 +53,7 @@ metrics:
 
 ## Cluster control switch
 cluster:
-  enabled: false
+  enabled: true
 
 # Common
 initContainerImage: "alpine:3.8"
@@ -178,8 +185,8 @@ logsPersistence:
     subPath: ""
 
 image:
-  repository: milvusdb/milvus
-  tag: 1.1.0-cpu-d050721-5e559c
+  repository: matrixji/milvus
+  tag: cpu-s3-90d5ee9
   pullPolicy: IfNotPresent
   ## Optionally specify an array of imagePullSecrets.
   ## Secrets must be manually created in the namespace.
@@ -374,6 +381,7 @@ mysql:
     existingClaim: ""
     annotations: {}
     #  "helm.sh/resource-policy": keep
-    storageClass:
+    storageClass: ceph
     accessMode: ReadWriteOnce
     size: 4Gi
+
